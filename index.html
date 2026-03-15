@@ -1,103 +1,51 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>HelpFontonne - Aider les enseignants</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      line-height: 1.5;
-      color: #333;
-      background: #f9f9f9;
-    }
-    header {
-      background: #4CAF50;
-      color: #fff;
-      padding: 1rem;
-      text-align: center;
-    }
-    main {
-      margin: 2rem;
-      max-width: 800px;
-      padding: 1.5rem;
-      background: #fff;
-      border-radius: 10px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    }
-    .form-container {
-      margin-top: 2rem;
-    }
-    label {
-      display: block;
-      margin-bottom: 0.5rem;
-      font-weight: bold;
-    }
-    textarea {
-      width: 100%;
-      height: 100px;
-      padding: 0.5rem;
-      border-radius: 5px;
-      border: 1px solid #ccc;
-    }
-    button {
-      background: #4CAF50;
-      color: white;
-      border: none;
-      padding: 0.5rem 1rem;
-      border-radius: 5px;
-      cursor: pointer;
-      margin-top: 1rem;
-    }
-    button:hover {
-      background: #45a049;
-    }
-    #response {
-      display: none;
-      margin-top: 20px;
-      padding: 1rem;
-      background: #e8f5e9;
-      border-left: 4px solid #4CAF50;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Chatbot</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        #chatbot { border: 1px solid #ccc; padding: 10px; width: 300px; height: 400px; overflow-y: auto; }
+        #user-input { width: 100%; padding: 10px; }
+    </style>
 </head>
 <body>
-  <header>
-    <h1>Bienvenue sur HelpFontonne</h1>
-    <p>Un espace pour les enseignants à la recherche de solutions.</p>
-  </header>
-  <main>
-    <h2>Poser une question sur une situation rencontrée</h2>
-    <p>Décrivez votre situation et posez votre question. Nous vous redirigerons vers des ressources adaptées.</p>
-    <form>
-      <label for="question">Décrivez votre situation :</label>
-      <textarea id="question" placeholder="Exemple : J'ai un élève qui perturbe beaucoup la classe malgré plusieurs avertissements..."></textarea>
-      <button type="submit">Soumettre votre question</button>
-    </form>
-    <div id="response">
-      <!-- La réponse apparaîtra ici -->
+    <div id="chatbot">
+        <div id="messages"></div>
     </div>
-  </main>
-  <script>
-    document.querySelector("form").addEventListener("submit", (e) => {
-      e.preventDefault();
-      const question = document.querySelector("#question").value.toLowerCase();
+    <input type="text" id="user-input" placeholder="Type your question here..." />
+    <script>
+        const messagesContainer = document.getElementById('messages');
+        const userInput = document.getElementById('user-input');
 
-      // Recherche basique
-      let result = "Je ne trouve pas de solution adaptée. Contactez un syndicat ou consultez les textes officiels.";
-      if (question.includes("perturbateur")) {
-        result = "Consultez les recommandations sur la gestion des élèves perturbateurs : <a href='#' target='_blank'>Lien Éducation nationale</a>.";
-      } else if (question.includes("absentéisme")) {
-        result = "Référez-vous à ce texte officiel sur l'absentéisme : <a href='#' target='_blank'>Article sur l'absentéisme</a>.";
-      }
+        function addMessage(message) {
+            const messageElement = document.createElement('div');
+            messageElement.textContent = message;
+            messagesContainer.appendChild(messageElement);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
 
-      // Afficher le résultat
-      const response = document.querySelector("#response");
-      response.innerHTML = result;
-      response.style.display = "block";
-    });
-  </script>
+        userInput.addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                const userText = userInput.value;
+                addMessage(`You: ${userText}`);
+                userInput.value = '';
+                processInput(userText);
+            }
+        });
+
+        function processInput(input) {
+            let response = '';
+            if (input.toLowerCase().includes('difficulty')) {
+                response = 'Can you specify what type of difficulty you are facing?';
+            } else if (input.toLowerCase().includes('resource')) {
+                response = 'What subject are you looking for resources in?';
+            } else {
+                response = 'Can you elaborate more on your question?';
+            }
+            addMessage(`Chatbot: ${response}`);
+        }
+    </script>
 </body>
 </html>

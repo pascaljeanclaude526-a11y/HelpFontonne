@@ -3,28 +3,74 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>HelpFontonne</title>
+  <title>HelpFontonne - Aider les enseignants</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      text-align: center;
       margin: 0;
       padding: 0;
+      line-height: 1.5;
+      color: #333;
+      background: #f9f9f9;
     }
     header {
-      background-color: #4CAF50;
-      padding: 2em;
+      background: #4CAF50;
+      color: #fff;
+      padding: 1rem;
+      text-align: center;
+    }
+    main {
+      margin: 2rem;
+      max-width: 800px;
+      padding: 1.5rem;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .form-container {
+      margin-top: 2rem;
+    }
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: bold;
+    }
+    textarea {
+      width: 100%;
+      height: 100px;
+      padding: 0.5rem;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    button {
+      background: #4CAF50;
       color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 1rem;
+    }
+    button:hover {
+      background: #45a049;
     }
   </style>
 </head>
 <body>
   <header>
     <h1>Bienvenue sur HelpFontonne</h1>
+    <p>Un espace pour les enseignants à la recherche de solutions.</p>
   </header>
   <main>
-    <p>Cette page est en construction.</p>
-    <p>Revenez bientôt pour plus de contenu !</p>
+    <h2>Poser une question sur une situation rencontrée</h2>
+    <p>Décrivez votre situation et posez votre question. Nous vous répondrons en nous appuyant sur les ressources de l'Éducation nationale et des syndicats.</p>
+    <div class="form-container">
+      <form>
+        <label for="question">Décrivez votre situation :</label>
+        <textarea id="question" placeholder="Exemple : J'ai un élève qui perturbe beaucoup la classe malgré plusieurs avertissements..."></textarea>
+        <button type="submit">Soumettre votre question</button>
+      </form>
+    </div>
   </main>
 </body>
 </html>

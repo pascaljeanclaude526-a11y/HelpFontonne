@@ -54,6 +54,13 @@
     button:hover {
       background: #45a049;
     }
+    #response {
+      display: none;
+      margin-top: 20px;
+      padding: 1rem;
+      background: #e8f5e9;
+      border-left: 4px solid #4CAF50;
+    }
   </style>
 </head>
 <body>
@@ -63,14 +70,34 @@
   </header>
   <main>
     <h2>Poser une question sur une situation rencontrée</h2>
-    <p>Décrivez votre situation et posez votre question. Nous vous répondrons en nous appuyant sur les ressources de l'Éducation nationale et des syndicats.</p>
-    <div class="form-container">
-      <form>
-        <label for="question">Décrivez votre situation :</label>
-        <textarea id="question" placeholder="Exemple : J'ai un élève qui perturbe beaucoup la classe malgré plusieurs avertissements..."></textarea>
-        <button type="submit">Soumettre votre question</button>
-      </form>
+    <p>Décrivez votre situation et posez votre question. Nous vous redirigerons vers des ressources adaptées.</p>
+    <form>
+      <label for="question">Décrivez votre situation :</label>
+      <textarea id="question" placeholder="Exemple : J'ai un élève qui perturbe beaucoup la classe malgré plusieurs avertissements..."></textarea>
+      <button type="submit">Soumettre votre question</button>
+    </form>
+    <div id="response">
+      <!-- La réponse apparaîtra ici -->
     </div>
   </main>
+  <script>
+    document.querySelector("form").addEventListener("submit", (e) => {
+      e.preventDefault();
+      const question = document.querySelector("#question").value.toLowerCase();
+
+      // Recherche basique
+      let result = "Je ne trouve pas de solution adaptée. Contactez un syndicat ou consultez les textes officiels.";
+      if (question.includes("perturbateur")) {
+        result = "Consultez les recommandations sur la gestion des élèves perturbateurs : <a href='#' target='_blank'>Lien Éducation nationale</a>.";
+      } else if (question.includes("absentéisme")) {
+        result = "Référez-vous à ce texte officiel sur l'absentéisme : <a href='#' target='_blank'>Article sur l'absentéisme</a>.";
+      }
+
+      // Afficher le résultat
+      const response = document.querySelector("#response");
+      response.innerHTML = result;
+      response.style.display = "block";
+    });
+  </script>
 </body>
 </html>
